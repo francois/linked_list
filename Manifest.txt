@@ -1,5 +1,6 @@
 History.txt
 Manifest.txt
+Benchmarks.txt
 README.rdoc
 Rakefile
 lib/linked_list.rb
@@ -7,6 +8,7 @@ lib/linked_list/node.rb
 script/console
 script/destroy
 script/generate
+tasks/benchmark.rake
 test/test_helper.rb
 test/test_linked_list.rb
 test/test_linked_list_node.rb

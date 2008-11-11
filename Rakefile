@@ -11,7 +11,7 @@ $hoe = Hoe.new('linked_list', LinkedList::VERSION) do |p|
     ['newgem', ">= #{::Newgem::VERSION}"],
     ['francois-shoulda', ">= 2.0.5"]
   ]
-  
+
   p.clean_globs |= %w[**/.DS_Store tmp *.log]
   path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
   p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
