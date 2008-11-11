@@ -4,7 +4,10 @@ $:.unshift(File.dirname(__FILE__)) unless
 require "linked_list/node"
 
 # Linked list implementation.
-# Linked lists have O(1) insertions and pops.  Traversal is O(1).
+# Linked lists have O(1) insertions and pops.  Traversal is O(n).
+#
+# == Implementation Notes
+# This implementation isn't thread safe.  In fact, traversal is thread safe, but insertions and removals aren't.
 #
 # This implementation has problems with #dup, but beyond that, it looks fine.  It needs to be battle tested though.
 # As a performance optimization, #size is cached and maintained locally, instead of being recalculated everytime.

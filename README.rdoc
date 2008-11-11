@@ -9,6 +9,7 @@ A simple linked list implementation that follows Ruby's conventions.
 == FEATURES/PROBLEMS:
 
 * FIXME: #dup is implemented by reversing the list twice.  This should be pretty slow...  Untested, not benchmarked.
+* This implementation isn't thread safe.
 
 == SYNOPSIS:
 
