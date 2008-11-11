@@ -128,6 +128,7 @@ class LinkedList
   # Pushes a new value at the head of this list
   def <<(value)
     @cdr = new_node(value, cdr)
+    @lcdr = @cdr if @lcdr.nil?
     @size += 1
     self
   end
@@ -140,13 +141,14 @@ class LinkedList
     @size -= 1
     value = cdr.value
     @cdr = cdr.cdr
+    @lcdr = nil if empty?
     value
   end
   alias_method :shift, :pop
 
   # Initializes this list to the empty state
   def clear
-    @cdr, @size = nil, 0
+    @cdr, @lcdr, @size = nil, nil, 0
   end
 
   # Returns the first value of this list
@@ -157,12 +159,7 @@ class LinkedList
   # Returns the last value of this list
   def last
     return nil if empty?
-    node = cdr
-    while node
-      prev = node
-      node = node.cdr
-    end
-    prev.value
+    @lcdr.value
   end
 
   def concat(other)

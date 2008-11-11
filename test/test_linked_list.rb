@@ -159,6 +159,36 @@ class TestLinkedList < Test::Unit::TestCase
       should "have a size of 0" do
         assert @list.size.zero?
       end
+
+      should "return nil from #last" do
+        assert_nil @list.last
+      end
+
+      should "return nil from #first" do
+        assert_nil @list.first
+      end
+
+      context "pushing 'b'" do
+        setup do
+          @list.push "b"
+        end
+
+        should "NOT be empty" do
+          assert !@list.empty?
+        end
+
+        should "be ['b']" do
+          assert_equal %w(b), @list.to_a
+        end
+
+        should "return 'b' from #last" do
+          assert_equal "b", @list.last
+        end
+
+        should "return 'b' from #first" do
+          assert_equal "b", @list.first
+        end
+      end
     end
 
     context "calling #to_a" do
