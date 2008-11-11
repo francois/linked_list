@@ -66,6 +66,26 @@ class TestLinkedList < Test::Unit::TestCase
       assert_nil @list.at(-1)
     end
 
+    should "return nil on #[](1)" do
+      assert_nil @list[1]
+    end
+
+    should "return nil on #[](-1)" do
+      assert_nil @list[-1]
+    end
+
+    should "return nil on #[](0, 1)" do
+      assert_equal [], @list[0, 1]
+    end
+
+    should "return nil on #[](0..1)" do
+      assert_equal [], @list[0..1]
+    end
+
+    should "return nil on #[](0)" do
+      assert_nil @list[0]
+    end
+
     should "return a new instance when calling #dup" do
       assert_not_same @list, @list.dup
     end
@@ -359,6 +379,58 @@ class TestLinkedList < Test::Unit::TestCase
 
     should "return 'e' for #at(-5)" do
       assert_equal "e", @list.at(-5)
+    end
+
+    should "return ['e', 'd', 'c', 'b', 'a'] for #[](0..10)" do
+      assert_equal %w(e d c b a), @list[0..10]
+    end
+
+    should "return ['e', 'd'] for #[](0..1)" do
+      assert_equal %w(e d), @list[0..1]
+    end
+
+    should "return ['e'] for #[](0..0)" do
+      assert_equal %w(e), @list[0..0]
+    end
+
+    should "return ['e', 'd', 'c'] for #[](0..2)" do
+      assert_equal %w(e d c), @list[0..2]
+    end
+
+    should "return ['e', 'd', 'c', 'b', 'a'] for #[](0, 10)" do
+      assert_equal %w(e d c b a), @list[0, 10]
+    end
+
+    should "return ['e'] for #[](0, 1)" do
+      assert_equal %w(e), @list[0, 1]
+    end
+
+    should "return ['e', 'd'] for #[](0, 2)" do
+      assert_equal %w(e d), @list[0, 2]
+    end
+
+    should "return nil for #[](-240)" do
+      assert_nil @list[-240]
+    end
+
+    should "return nil for #[](240)" do
+      assert_nil @list[240]
+    end
+
+    should "return nil for #[](-240, 100)" do
+      assert_nil @list[-240, 100]
+    end
+
+    should "return nil for #[](240, 100)" do
+      assert_nil @list[240, 100]
+    end
+
+    should "return ['b', 'a'] for #[](-2..-1)" do
+      assert_equal %w(b a), @list[-2..-1]
+    end
+
+    should "return ['c', 'b'] for #[](-3, 2)" do
+      assert_equal %w(c b), @list[-3, 2]
     end
   end
 end

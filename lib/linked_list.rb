@@ -53,6 +53,7 @@ class LinkedList
       node = node.cdr
     end
   end
+  protected :each_node
 
   # Returns an Array that has the same values as this LinkedList
   def to_a
@@ -62,11 +63,43 @@ class LinkedList
   end
 
   def at(index)
-    index = (length + index) if index < 0
+    index = normalize_index(index)
     each_with_index do |value, idx|
       return value if index == idx
     end
     nil
+  end
+  
+  def normalize_index(index)
+    index < 0 ? (length + index) : index
+  end
+  protected :normalize_index
+
+  def [](*args)
+    case args.length
+    when 1
+      case args.first
+      when Range
+        indexes = args.first
+        start, stop = normalize_index(indexes.first), normalize_index(indexes.exclude_end? ? indexes.last - 1 : indexes.last)
+        indexes = (start .. stop)
+        result = []
+        each_with_index do |value, idx|
+          next unless indexes.include?(idx)
+          result << value
+        end
+        result
+      else
+        at(args.first)
+      end
+    when 2
+      index = normalize_index(args.first)
+      return nil unless (0 .. length).include?(index)
+      count = args.last
+      self[index ... (index + count)]
+    else
+      raise ArgumentError, "Expected (index), (index, length) or (index0..index1), received #{args.inspect}"
+    end
   end
 
   # Returns a new instance of self with a reverse insertion order
