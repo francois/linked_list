@@ -58,6 +58,14 @@ class TestLinkedList < Test::Unit::TestCase
       end
     end
 
+    should "return nil on #at(0)" do
+      assert_nil @list.at(0)
+    end
+
+    should "return nil on #at(-1)" do
+      assert_nil @list.at(-1)
+    end
+
     should "return a new instance when calling #dup" do
       assert_not_same @list, @list.dup
     end
@@ -148,6 +156,26 @@ class TestLinkedList < Test::Unit::TestCase
         @list.map! {|value| value*2}
         assert_not_equal @list, @other
       end
+    end
+
+    should "return 'a' for #at(-1)" do
+      assert_equal "a", @list.at(-1)
+    end
+
+    should "return 'a' for #at(0)" do
+      assert_equal "a", @list.at(0)
+    end
+
+    should "return nil for #at(2)" do
+      assert_nil @list.at(2)
+    end
+
+    should "return nil for #at(-2)" do
+      assert_nil @list.at(-2)
+    end
+
+    should "return nil for #at(1)" do
+      assert_nil @list.at(1)
     end
 
     should "return 'a' for #first" do
@@ -274,6 +302,22 @@ class TestLinkedList < Test::Unit::TestCase
       end
     end
 
+    should "return 'b' for #at(0)" do
+      assert_equal "b", @list.at(0)
+    end
+
+    should "return 'a' for #at(1)" do
+      assert_equal "a", @list.at(1)
+    end
+
+    should "return 'a' for #at(-1)" do
+      assert_equal "a", @list.at(-1)
+    end
+
+    should "return 'b' for #at(-2)" do
+      assert_equal "b", @list.at(-2)
+    end
+
     should "return 'b' for #first" do
       assert_equal "b", @list.first
     end
@@ -296,6 +340,25 @@ class TestLinkedList < Test::Unit::TestCase
         yields << [value, index]
       end
       assert_equal [["b", 0], ["a", 1]], yields
+    end
+  end
+
+  context "A list with 5 elements" do
+    setup do
+      @list = LinkedList.new
+      @list << "a" << "b" << "c" << "d" << "e"
+    end
+
+    should "have a length of 5" do
+      assert_equal 5, @list.length
+    end
+
+    should "return 'a' for #at(-1)" do
+      assert_equal "a", @list.at(-1)
+    end
+
+    should "return 'e' for #at(-5)" do
+      assert_equal "e", @list.at(-5)
     end
   end
 end

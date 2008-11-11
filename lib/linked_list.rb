@@ -61,6 +61,14 @@ class LinkedList
     end
   end
 
+  def at(index)
+    index = (length + index) if index < 0
+    each_with_index do |value, idx|
+      return value if index == idx
+    end
+    nil
+  end
+
   # Returns a new instance of self with a reverse insertion order
   def reverse
     list = self.class.new
