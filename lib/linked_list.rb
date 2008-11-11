@@ -175,6 +175,7 @@ class LinkedList
     end
     result
   end
+  alias_method :+, :concat
 
   # Returns a new instance of the same class as self.
   def new_species

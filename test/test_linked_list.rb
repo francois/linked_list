@@ -22,7 +22,7 @@ class TestLinkedList < Test::Unit::TestCase
 
     context "#push'ing an element" do
       setup do
-      @list.push "a"
+        @list.push "a"
       end
 
       should "be equal to ['a']" do
@@ -185,7 +185,7 @@ class TestLinkedList < Test::Unit::TestCase
       setup do
         @other = @list.dup
       end
-      
+
       should "be a new instance" do
         assert_not_same @list, @other
       end
@@ -470,6 +470,16 @@ class TestLinkedList < Test::Unit::TestCase
 
       should "return ['e', 'd', 'c', 'b', 'a', 'x', 'y', 'z']" do
         assert_equal %w(e d c b a x y z), @other.to_a
+      end
+    end
+
+    context "calling #+(('z' nil))" do
+      setup do
+        @other = @list + (LinkedList.new << "z")
+      end
+
+      should "return ['e', 'd', 'c', 'b', 'a', 'z']" do
+        assert_equal %w(e d c b a z), @other.to_a
       end
     end
   end
