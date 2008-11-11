@@ -22,7 +22,7 @@ class LinkedList
     clear
   end
 
-  # Two lists are equal if their cdr's are equal.
+  # Two lists are equal if they have the same values in the same positions.
   def ==(other)
     cdr == other.cdr
   end
