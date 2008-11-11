@@ -45,7 +45,7 @@ class LinkedList
     end
   end
 
-  # Yields each LinkedList::Node
+  # Yields each LinkedList::Node (or subclass)
   def each_node
     node = cdr
     while node
@@ -104,7 +104,7 @@ class LinkedList
 
   # Returns a new instance of self with a reverse insertion order
   def reverse
-    list = self.class.new
+    list = new_species
     each do |value|
       list << value
     end
@@ -127,7 +127,7 @@ class LinkedList
 
   # Pushes a new value at the head of this list
   def <<(value)
-    @cdr = Node.new(value, cdr)
+    @cdr = new_node(value, cdr)
     @size += 1
     self
   end
@@ -164,6 +164,35 @@ class LinkedList
     end
     prev.value
   end
+
+  def concat(other)
+    result = new_species
+    other.reverse.each do |value|
+      result << value
+    end
+    self.reverse.each do |value|
+      result << value
+    end
+    result
+  end
+
+  # Returns a new instance of the same class as self.
+  def new_species
+    self.class.new
+  end
+  protected :new_species
+
+  # Returns a new node instance.
+  def new_node(value, cdr)
+    node_class.new(value, cdr)
+  end
+  protected :new_node
+
+  # Returns the class of node to use.  Defaults to LinkedList::Node.
+  def node_class
+    LinkedList::Node
+  end
+  protected :node_class
 
   # Returns a nice looking view of this list.
   #  list = LinkedList.new

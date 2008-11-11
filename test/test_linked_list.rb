@@ -117,6 +117,24 @@ class TestLinkedList < Test::Unit::TestCase
       end
       assert yielded.zero?
     end
+
+    context "calling #concat(['a'])" do
+      setup do
+        @other = @list.concat(%w(a))
+      end
+
+      should "return a new list" do
+        assert_not_same @other, @list
+      end
+
+      should "return a list with one more element" do
+        assert_equal @list.length + 1, @other.length
+      end
+
+      should "return a list equal to ('a' nil)" do
+        assert_equal LinkedList.new << "a", @other
+      end
+    end
   end
 
   context "A linked list with one element" do
@@ -431,6 +449,28 @@ class TestLinkedList < Test::Unit::TestCase
 
     should "return ['c', 'b'] for #[](-3, 2)" do
       assert_equal %w(c b), @list[-3, 2]
+    end
+
+    context "calling #concat(['x', 'y', 'z'])" do
+      setup do
+        @other = @list.concat(%w(x y z))
+      end
+
+      should "return a new list" do
+        assert_not_same @list, @other
+      end
+
+      should "return a list of 8 elements" do
+        assert_equal 8, @other.length
+      end
+
+      should "return a LinkedList" do
+        assert_kind_of LinkedList, @other
+      end
+
+      should "return ['e', 'd', 'c', 'b', 'a', 'x', 'y', 'z']" do
+        assert_equal %w(e d c b a x y z), @other.to_a
+      end
     end
   end
 end
