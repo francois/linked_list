@@ -1,26 +1,35 @@
-= linked_list
+= LinkedList
 
-* FIX (url)
+* http://linkedlist.rubyforge.org/
 
 == DESCRIPTION:
 
-FIX (describe your package)
+A simple linked list implementation that follows Ruby's conventions.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* FIXME: #dup is implemented by reversing the list twice.  This should be pretty slow...  Untested, not benchmarked.
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  list = LinkedList.new
+  list << "a"
+  list.push "b"
+  list.unshift "c"
+  list.inspect
+  #=> ("c" ("b" ("a" nil)))
+  list.pop
+  #=> ("b" ("a" nil))
+  list.map {|v| v*2}
+  #=> ("bb" ("aa" nil))
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* Ruby 1.8.6+
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install linked_list
 
 == LICENSE:
 
