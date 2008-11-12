@@ -12,7 +12,7 @@ require "linked_list/node"
 # This implementation has problems with #dup, but beyond that, it looks fine.  It needs to be battle tested though.
 # As a performance optimization, #size is cached and maintained locally, instead of being recalculated everytime.
 class LinkedList
-  VERSION = '0.0.1'
+  VERSION = '1.0.0'
   include Enumerable
 
   attr_reader :cdr, :size
